@@ -45,7 +45,6 @@ const Login = () => {
 
   const handleGoogle = async (e) => {
     e.preventDefault();
-    
       await googleSignin();
       ToastSuccess();
    
