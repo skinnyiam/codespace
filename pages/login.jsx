@@ -45,13 +45,10 @@ const Login = () => {
 
   const handleGoogle = async (e) => {
     e.preventDefault();
-    try {
+    
       await googleSignin();
       ToastSuccess();
-    } catch (err){
-      console.log(err);
-      ToastError();
-    }
+   
   };
 
   const defaultOptions = {
