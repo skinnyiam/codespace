@@ -30,7 +30,7 @@ const Journal = () => {
       <div className="flex justify-center mt-4 ">
         <h1 className="sm:text-2xl font-bold text-white text-xl mx-auto">
           {" "}
-          Welcome Saurabh to CodeSpace
+          Welcome to CodeSpace
         </h1>
       </div>
 
