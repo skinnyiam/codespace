@@ -43,6 +43,7 @@ const Journal = () => {
           label="Create new Document"
           aria-label="A tooltip"
           placement="top"
+
         >
           <button className="mb-2">
             <Link href="/editjournal">
