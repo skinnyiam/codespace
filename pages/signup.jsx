@@ -115,7 +115,7 @@ const Signup = () => {
   return (
     <>
       <Head>
-        <title> Sign| Codespace </title>{" "}
+        <title> Sign| Codespac </title>{" "}
         <link rel="icon" type="image/png" sizes="16*16" href="/Code1.png" />
       </Head>
       <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-screen pt-[75px] mx-auto">
