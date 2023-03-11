@@ -1,6 +1,4 @@
-import React from "react";
 import {
- 
   collection,
   getDocs,
   doc,
@@ -8,19 +6,16 @@ import {
   deleteDoc,
   getDoc,
   orderBy,
-query,
-
-onSnapshot
-  
+  query,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 const editDay = async (UID, Documents, time) => {
   try {
     const editDayDocRef = doc(db, "users", `${UID}`, "editDay", `${time}`);
-    
+
     await setDoc(editDayDocRef, Documents);
-    
   } catch (e) {
     console.log("error", e);
   }
@@ -28,15 +23,23 @@ const editDay = async (UID, Documents, time) => {
 
 const sort = async (UID) => {
   // console.log(UID)
-   const colRef=collection(db, "users", `${UID}`, "editDay")
-   const q= query(colRef,orderBy("date","asc"));
-   onSnapshot(q,(snapshot)=>{
-    let data=[]
-    snapshot.docs.forEach((doc)=>{
-      data.push(({...doc.data()}))
-    })
-    console.log(data)
-  })
+  let data = [];
+
+  try {
+    const colRef = collection(db, "users", `${UID}`, "editDay");
+    const q = query(colRef, orderBy("date", "desc"));
+    onSnapshot(q, (snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        data.push({ ...doc.data() });
+      });
+      // console.log(data);
+      return data;
+    });
+  } catch (err) {
+    console.log(err);
+  } finally {
+    return data;
+  }
 };
 
 const getDay = async (UID) => {
@@ -45,7 +48,7 @@ const getDay = async (UID) => {
   try {
     const getDayDocRef = collection(db, "users", `${UID}`, "editDay");
     const data = await getDocs(getDayDocRef);
-   
+
     docDay = data.docs.map((e) => {
       return { datas: e.data(), id: e.id };
     });
@@ -85,4 +88,5 @@ const deleteData = async (UID, id) => {
 const useFirestore = () => {
   return { editDay, getDay, getParticularData, deleteData, sort };
 };
+
 export default useFirestore;

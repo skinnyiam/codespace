@@ -1,35 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Input from "../components/Input";
-import Output from "../components/Output";
 import Lottie from "react-lottie";
 import Code from "../lotties/code.json";
 
 const Index = () => {
-  const [flag, setFlag] = useState(false);
-  const [input, setInput] = useState({
-    progress: "",
-    resources: "",
-    outcome: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-  const handle = () => {
-    console.log(input);
-    buttonHandler();
+  const [nav, setNav] = useState(false);
+  const handleClick = () => {
+    setNav(!nav);
   };
 
-  useEffect(() => {
-    console.log(input);
-  }, [input]);
-
-  const buttonHandler = () => {
-    setFlag((current) => !current);
-    console.log(flag); // is false
-  };
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -47,7 +27,7 @@ const Index = () => {
       <div className=" h-screen w-full mx-auto pt-16 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         {" "}
         {/* terminal div  */}{" "}
-        <div className="flex flex-col h-[600px] mt-8 bg-black rounded-2xl max-w-[1160px] mx-auto">
+        <div className="flex flex-col h-[600px] mt-8 bg-black rounded-2xl max-w-[1160px] mx-4 sm:mx-4 md:mx-4 lg:mx-auto ">
           <div className="bg-slate-600 h-[30px]  rounded-t-2xl flex">
             <div className="ml-2 flex">
               <div className="rounded-full h-[15px] w-[15px] bg-red-600 mt-2 mr-2">
@@ -62,7 +42,7 @@ const Index = () => {
             </div>{" "}
           </div>{" "}
           <div className="flex mt-10 justify-between ">
-            <div className="flex flex-col w-[500px] ml-20 mt-0 pl-8">
+            <div className="flex flex-col w-[500px] ml-2 sm:ml-20 mt-0 pl-2 sm:pl-8">
               <h1 className="text-blue-600 font-bold text-4xl"> {"<h1>"} </h1>{" "}
               <h1 className="text-white font-bold text-4xl">
                 {" "}
@@ -97,7 +77,7 @@ const Index = () => {
                 <Link href="/dashboard"> Get Started </Link>{" "}
               </button>{" "}
             </div>{" "}
-            <div className="w-[400px] flex justify-center items-center pr-20 z-30">
+            <div className="w-[400px]  justify-center items-center pr-20 z-30 hidden sm:hidden md:hidden lg:flex">
               {" "}
               {/* <img src="/cp.png" alt="" width="350px" height="350px" /> */}{" "}
               <Lottie options={defaultOptions} height={300} width={300} />{" "}

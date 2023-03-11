@@ -45,9 +45,8 @@ const Login = () => {
 
   const handleGoogle = async (e) => {
     e.preventDefault();
-      await googleSignin();
-      ToastSuccess();
-   
+    await googleSignin();
+    ToastSuccess();
   };
 
   const defaultOptions = {
@@ -180,11 +179,11 @@ const Login = () => {
 
             {/* login div  */}
 
-            <div className="flex flex-col justify-center items-center sm:h-auto sm:w-[590px] bg-stone-300 w-auto">
+            <div className="flex flex-col justify-center items-center sm:h-auto  sm:w-[590px] bg-transparent sm:bg-stone-300 w-auto">
               <div className="absolute z-10 ml-8 ">
-                <Lottie options={defaultOptions1} height={600} width={900} />
+                {/* <Lottie options={defaultOptions1} height={600} width={900} /> */}
               </div>
-              <div className="  bg-gray-600 rounded-2xl sm:h-[500px] h-auto w-[300px] shadow-lg shadow-gray-800 z-40">
+              <div className="  bg-gray-600 rounded-2xl sm:h-[500px] h-auto w-[300px] p-2 sm:p-0 shadow-lg shadow-gray-800 z-40">
                 <div className="flex flex-col justify-center items-center mt-2">
                   <img className="h-[30px] w-[30px]" src="/logo.png" alt="" />
                   <h3 className="text-3xl ml-10 font-bold text-white ">
@@ -233,7 +232,7 @@ const Login = () => {
                         onClick={handleGoogle}
                         className="flex justify-center items-center mx-auto h-[33px] w-[210px] rounded-lg mt-4 font-semibold text-white bg-gray-700 "
                       >
-                        <FcGoogle className="text-xl mr-2"/>
+                        <FcGoogle className="text-xl mr-2" />
                         Continue with Google
                       </button>
                     </div>

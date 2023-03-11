@@ -2,27 +2,29 @@ import React, { useState, useEffect } from "react";
 import DayCard from "./dayCard";
 import Link from "next/link";
 import { Tooltip } from "@chakra-ui/react";
-import Norecords from "../components/noredords"
+import Norecords from "../components/noredords";
 import useFirestore from "../hooks/useFirestore";
 import { useUserAuth } from "../context/authContext";
 
 const Journal = () => {
   const { user } = useUserAuth();
-  const { getDay } = useFirestore();
-
+  const { getDay, sort } = useFirestore();
   const [records, setRecords] = useState([]);
-
+  const [isSorted, setIsSorted] = useState(false);
   const getDayRecords = () => {
     if (user) {
       getDay(user.uid).then((data) => {
         setRecords(data);
-        console.log(data);
+        // console.log(data);
       });
     }
   };
 
   useEffect(() => {
     getDayRecords();
+    sort(user.uid).then((data) => {
+      setRecords(data);
+    });
   }, []);
 
   return (
@@ -34,7 +36,7 @@ const Journal = () => {
         </h1>
       </div>
 
-      <div className="sm:mt-6 mt-4  mx-w-[850px] flex justify-between sm:mx-0 mx-[-10px]  bg-white w-full sm:h-20 h-auto rounded-lg bg-opacity-20 backdrop-filter backdrop-blur-lg border-0 border-black drop-shadow-2xl p-6 ">
+      <div className="sm:mt-6 mt-4  mx-w-[850px] flex justify-between mx-4 sm:mx-0   bg-white w-auto sm:w-full sm:h-20 h-auto rounded-lg bg-opacity-20 backdrop-filter backdrop-blur-lg border-0 border-black drop-shadow-2xl p-6 ">
         <h1 className="font-bold text-md ">
           Plan your day here ... What you learnt ? , save your resources , What
           went well ?
@@ -43,7 +45,6 @@ const Journal = () => {
           label="Create new Document"
           aria-label="A tooltip"
           placement="top"
-
         >
           <button className="mb-2">
             <Link href="/editjournal">
@@ -65,18 +66,16 @@ const Journal = () => {
       <h1 className="mt-6 text-xl flex justify-center font-bold text-white">
         Previous Records
       </h1>
-
-      <div className="text ml-2 font-semibold text-zinc-200 w-auto max-h-[2000px]">
-           {
-            records.length==0 ? <Norecords /> : null
-           }
-        { records.map((el) => {
+      {/* <h1 onClick={fetchData}>Sort</h1> */}
+      <div className="text ml-2 font-semibold text-zinc-200 w-auto max-h-[2000px] p-4 sm:p-2">
+        {records.length == 0 ? <Norecords /> : null}
+        {records.map((el) => {
           return (
             <DayCard
-              day={el.datas.day}
-              focus={el.datas.focus}
-              id={el.id}
-              key={el.id}
+              day={el.datas?.day}
+              focus={el.datas?.focus}
+              id={el?.id}
+              key={el?.id}
               records={records}
               setRecords={setRecords}
             />

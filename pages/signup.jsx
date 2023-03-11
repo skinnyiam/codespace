@@ -9,17 +9,16 @@ import Head from "next/head";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useUserAuth } from "../context/authContext";
-import {useRouter } from "next/router"
+import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 
 const Signup = () => {
   const [setup, setSetup] = useState("");
   const [delivery, setDelivery] = useState([]);
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
-  const {signup,googleSignin} =useUserAuth()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { signup, googleSignin } = useUserAuth();
   const router = useRouter();
-
 
   const getJokes = async () => {
     const response = await fetch(`https://v2.jokeapi.dev/joke/Dark?amount=1`);
@@ -30,28 +29,28 @@ const Signup = () => {
     setDelivery(data.delivery);
   };
 
-  const handleSubmit=async (e)=>{
-        e.preventDefault();
-      
-        try{
-          await signup(email,password)
-         ToastSuccess();
-        }catch(err){
-           console.log(err)
-           ToastError()
-        }
-  }
-
-  const handleGoogle = async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      await googleSignin()
+
+    try {
+      await signup(email, password);
       ToastSuccess();
-    }catch{
-      console.log(err)
-      ToastError()
+    } catch (err) {
+      console.log(err);
+      ToastError();
     }
-  }
+  };
+
+  const handleGoogle = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignin();
+      ToastSuccess();
+    } catch (err) {
+      console.log(err);
+      ToastError();
+    }
+  };
 
   const defaultOptions = {
     loop: true,
@@ -115,11 +114,11 @@ const Signup = () => {
   return (
     <>
       <Head>
-        <title> Sign| Codespace </title>{" "}
+        <title> Sign Up | Codespace </title>{" "}
         <link rel="icon" type="image/png" sizes="16*16" href="/Code1.png" />
       </Head>
       <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-screen pt-[75px] mx-auto">
-        <div className="max-w-[1180px] bg-white mx-auto flex justify-around h-[80vh] rounded-2xl">
+        <div className="max-w-[1180px] bg-transparent sm:bg-white mx-auto flex justify-around sm:h-[80vh] rounded-2xl">
           {/* main div  */}
 
           <div className="flex">
@@ -127,11 +126,11 @@ const Signup = () => {
 
             {/* login div  */}
 
-            <div className="flex flex-col justify-center items-center w-[590px] bg-stone-300 ">
+            <div className="flex flex-col justify-center items-center sm:w-[590px] w-auto bg-transparent sm:bg-stone-300 ">
               <div className="absolute z-10 ml-8">
-                <Lottie options={defaultOptions1} height={600} width={900} />
+                {/* <Lottie options={defaultOptions1} height={600} width={900} /> */}
               </div>
-              <div className="  bg-gray-600 rounded-2xl h-[500px] w-[300px] shadow-lg shadow-gray-800 z-40">
+              <div className="p-2 sm:p-0 mx-4 sm:mx-0 bg-gray-600 rounded-2xl sm:h-[500px] h-auto sm:w-[300px]  shadow-lg shadow-gray-800 z-40">
                 <div className="flex flex-col justify-center items-center mt-2">
                   <img className="h-[30px] w-[30px]" src="/logo.png" alt="" />
                   <h3 className="text-3xl ml-16 font-bold text-white ">
@@ -142,7 +141,6 @@ const Signup = () => {
 
                 <div className="flex flex-col mt-8">
                   <form className="">
-                   
                     <div className="mb-4">
                       <h1 className="text-md text-white font-medium ml-8">
                         Email
@@ -151,7 +149,7 @@ const Signup = () => {
                         type="text"
                         className="form-control block w-60 mx-auto px-3 py-1.5  text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         placeholder="Username"
-                        onChange={(e)=>setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div className="mb-4">
@@ -162,14 +160,14 @@ const Signup = () => {
                         type="password"
                         className="form-control block w-60 mx-auto px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         placeholder="Password"
-                        onChange={(e)=>setPassword(e.target.value)
-                        }
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
                     <div className="text-center pt-1">
-                      <button 
-                      onClick={handleSubmit}
-                      className=" h-[33px] font-medium w-[170px] rounded-lg text-white transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+                      <button
+                        onClick={handleSubmit}
+                        className=" h-[33px] font-medium w-[170px] rounded-lg text-white transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+                      >
                         Sign Up
                       </button>
                       <ToastContainer closeOnClick />
@@ -179,7 +177,7 @@ const Signup = () => {
                         onClick={handleGoogle}
                         className="flex justify-center items-center mx-auto h-[33px] w-[210px] rounded-lg mt-4 font-semibold text-white bg-gray-700 "
                       >
-                        <FcGoogle className="text-xl mr-2"/>
+                        <FcGoogle className="text-xl mr-2" />
                         Continue with Google
                       </button>
                     </div>
@@ -199,7 +197,7 @@ const Signup = () => {
               </div>
             </div>
           </div>
-          <div className="w-[590px] bg-gray-600">
+          <div className="w-[590px] bg-gray-600 md:block sm:block hidden">
             <div className="pt-4 flex justify-center">
               <button
                 onClick={getJokes}
